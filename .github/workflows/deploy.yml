@@ -1,0 +1,58 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@tegud 
+measureitnow
+/
+registration-api
+Private
+1
+00
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+registration-api/.github/workflows/prod.yml
+@tegud
+tegud set environment variable
+Latest commit e7435fc on 13 Sep 2020
+ History
+ 1 contributor
+57 lines (53 sloc)  1.72 KB
+   
+name: prod
+
+on:
+  push:
+    tags:        
+      - v*
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+    - name: install & test
+      run: npm cit
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.REGISTRY_TOKEN}}
+    - name: serverless deploy
+      uses: tegud/serverless-github-action@3fe770b519365a942eb4c38069726a833a0fb01f
+      with:
+        command: deploy
+        args: "--stage=dev"

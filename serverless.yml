@@ -1,0 +1,14 @@
+service: uatu
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage,'dev'}
+  region: eu-west-2
+functions:
+  register:
+    handler: handler.doorEvent
+    events:
+      - http:
+          path: /door
+          method: post
