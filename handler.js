@@ -1,6 +1,8 @@
 module.exports = {
-    doorEvent: (event) => {
+    doorEvent: async (event) => {
         console.log(event);
-        return { statusCode: 204 }
+        return {
+            statusCode: 200,
+        };
     }
 };
