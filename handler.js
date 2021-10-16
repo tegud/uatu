@@ -10,7 +10,7 @@ const STATE_MAP = {
 };
 const stateText = ({ state }) => `${state}${state.substring(state.length - 1) === 'e' ? 'd' : 'ed'}`;
 
-const createSlackMessage = ({ body }) => {
+const createSlackMessage = (body) => {
     const title = `${toTitleCase(body.device)} ${stateText(body)}`;
     const color = STATE_MAP[body.state];
     return { title, color };
