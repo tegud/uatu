@@ -63,11 +63,12 @@ const STATE_MAP = {
     'open': 'warning',
     'close': 'good',
 };
+const stateText = ({ state }) => `${state}${state.substring(state.length - 1) === 'e' ? 'd' : 'ed'}`;
 
 module.exports = {
     doorEvent: async (event) => {
         const body = JSON.parse(event.body || '{}');
-        const title = `${toTitleCase(body.device)} ${body.state}ed`;
+        const title = `${toTitleCase(body.device)} ${stateText(body)}`;
         const color = STATE_MAP[body.state];
 
         await sendMessage( {
