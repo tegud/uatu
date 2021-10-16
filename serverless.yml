@@ -10,11 +10,17 @@ provider:
     HOUSE_UPDATE_PUSHOVER_TOKEN: ${env:HOUSE_UPDATE_PUSHOVER_TOKEN}
     HOUSE_UPDATE_PUSHOVER_USER: ${env:HOUSE_UPDATE_PUSHOVER_USER}
 functions:
-  register:
+  doorEvent:
     handler: handler.doorEvent
     events:
       - http:
           path: /door
+          method: post
+  smartThings:
+    handler: handler.smartThings
+    events:
+      - http:
+          path: /smart-things
           method: post
 
 

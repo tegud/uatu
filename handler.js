@@ -28,5 +28,14 @@ module.exports = {
         return {
             statusCode: 200,
         };
+    },
+    smartThings: async (event) => {
+        const body = JSON.parse(event.body || '{}');
+
+        console.log(body);
+        
+        return {
+            statusCode: 200,
+        };
     }
 };
