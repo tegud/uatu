@@ -70,7 +70,7 @@ module.exports = {
         const title = `${toTitleCase(body.device)} ${body.state}ed`;
         const color = STATE_MAP[body.state];
 
-        sendMessage( {
+        await sendMessage( {
             title,
             color,
         });
