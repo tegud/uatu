@@ -66,8 +66,9 @@ const STATE_MAP = {
 
 module.exports = {
     doorEvent: async (event) => {
-        const title = `${toTitleCase(event.device)} ${event.state}ed`;
-        const color = STATE_MAP[event.state];
+        const body = JSON.parse(event.body || '{}');
+        const title = `${toTitleCase(body.device)} ${body.state}ed`;
+        const color = STATE_MAP[body.state];
 
         sendMessage( {
             title,
