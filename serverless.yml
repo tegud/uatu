@@ -5,6 +5,8 @@ provider:
   runtime: nodejs14.x
   stage: ${opt:stage,'dev'}
   region: eu-west-2
+  environment:
+    HOUSE_UPDATE_WEBHOOK: ${env:HOUSE_UPDATE_WEBHOOK}
 functions:
   register:
     handler: handler.doorEvent
@@ -12,3 +14,6 @@ functions:
       - http:
           path: /door
           method: post
+
+
+          
