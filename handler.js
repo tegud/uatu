@@ -36,7 +36,12 @@ module.exports = {
             'open': 'warning',
             'closed': 'good',
         };
-        const { id, value, name: display_name, description } = body;
+        const { id, value, name, description } = body;
+
+        if (name !== 'contact') {
+            console.log(body);
+            return { statusCode: 200 };
+        }
 
         await Promise.all([
             sendSlackMessage({ title: description, color: STATE_MAP[value] }),
