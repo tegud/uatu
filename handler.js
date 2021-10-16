@@ -23,7 +23,7 @@ module.exports = {
         await Promise.all([
             sendSlackMessage(createSlackMessage(body)),
             sendPushoverMessage({ title: 'House Update', message: `${toTitleCase(body.device)} ${stateText(body)}` }),
-        ])l
+        ]);
 
         return {
             statusCode: 200,
