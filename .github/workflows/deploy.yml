@@ -16,8 +16,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
-    - name: install & test
-      run: npm cit
     - name: serverless deploy
       uses: tegud/serverless-github-action@3fe770b519365a942eb4c38069726a833a0fb01f
       with:
