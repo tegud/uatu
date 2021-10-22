@@ -5,6 +5,8 @@ const toTitleCase = (input) => input.split('-').map(s => `${s.substring(0, 1).to
 
 const SLACK_COLORS = ['good', 'warning', 'danger'];
 
+const stateText = ({ state }) => `${state}${state.substring(state.length - 1) === 'e' ? 'd' : 'ed'}`;
+
 module.exports = {
     doorEvent: async (event) => {
         const body = JSON.parse(event.body || '{}');
@@ -13,8 +15,6 @@ module.exports = {
             'close': 'good',
         };
         
-        const stateText = ({ state }) => `${state}${state.substring(state.length - 1) === 'e' ? 'd' : 'ed'}`;
-
         const createSlackMessage = (body) => {
             const title = `${toTitleCase(body.device)} ${stateText(body)}`;
             const color = STATE_MAP[body.state];
@@ -51,5 +51,23 @@ module.exports = {
         return {
             statusCode: 200,
         };
-    }
+    },
+    homeAssistant: async (event) => {
+        const STATE_MAP = {
+            'open': 'warning',
+            'closed': 'good',
+        };
+        
+        const { device, state } = event.queryStringParameters;
+        const description = `${toTitleCase(device)} ${state}`;
+        
+        await Promise.all([
+            sendSlackMessage({ title: description, color: STATE_MAP[state] }),
+            sendPushoverMessage({ title: 'House Update', message: description }),
+        ]);
+
+        return {
+            statusCode: 200,
+        };
+    },
 };
