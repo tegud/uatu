@@ -59,7 +59,7 @@ module.exports = {
         };
         
         const { device, state } = event.queryStringParameters;
-        const description = `${toTitleCase(device)} ${state}`;
+        const description = `${toTitleCase(device)} ${stateText({ state })}`;
         
         await Promise.all([
             sendSlackMessage({ title: description, color: STATE_MAP[state] }),
