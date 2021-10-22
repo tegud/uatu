@@ -22,6 +22,9 @@ functions:
       - http:
           path: /smart-things
           method: post
-
-
-          
+  homeAssistant:
+    handler: handler.homeAssistant
+    events:
+      - http:
+          path: /home-assistant
+          method: get
