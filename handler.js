@@ -54,6 +54,7 @@ const stateText = ({ state }) => `${state}${state.substring(state.length - 1) ==
     },
     homeAssistant: async (event) => {
         const STATE_MAP = {
+            'motion detected': 'warning',
             'open': 'warning',
             'closed': 'good',
         };
