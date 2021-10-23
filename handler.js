@@ -5,7 +5,6 @@ const toTitleCase = (input) => input.split('-').map(s => `${s.substring(0, 1).to
 
 const SLACK_COLORS = ['good', 'warning', 'danger'];
 
-const stateText = ({ state }) => `${state}${state.substring(state.length - 1) === 'e' ? 'd' : 'ed'}`;
 
 module.exports = {
     doorEvent: async (event) => {
@@ -14,6 +13,7 @@ module.exports = {
             'open': 'warning',
             'close': 'good',
         };
+const stateText = ({ state }) => `${state}${state.substring(state.length - 1) === 'e' ? 'd' : 'ed'}`;
         
         const createSlackMessage = (body) => {
             const title = `${toTitleCase(body.device)} ${stateText(body)}`;
@@ -57,6 +57,7 @@ module.exports = {
             'open': 'warning',
             'closed': 'good',
         };
+        const stateText = ({ state }) => state.endsWith('ed') ? state : `${state}ed`;
         
         const { device, state } = event.queryStringParameters;
         const description = `${toTitleCase(device)} ${stateText({ state })}`;
